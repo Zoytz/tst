@@ -8,6 +8,8 @@
   margin: 0;
   padding: 0;
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
   max-width: 100%;
@@ -15,19 +17,12 @@
 
 .form {
   max-width: 555px;
-  width: 80%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  flex: 1 1 auto;
   padding: 10px;
-}
-
-.form__title {
-  font-size: 20px;
-  margin: 10px 0 10px;
-  height: 22px;
-  line-height: 20px;
 }
 
 .form__input {
@@ -43,12 +38,10 @@
 .buttons {
   padding: 10px 10px 10px 0;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 20px;
-  justify-content: flex-end;
   align-items: center;
-  height: 100%;
-  width: 15%;
+  height: 15%;
 }
 
 .button {
@@ -75,10 +68,17 @@
   background-image: url(./images/reload.png);
 }
 
-.buttons__title {
+.titles {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  height: 5%;
+}
+
+.titles__title {
   text-align: center;
   margin-top: 10px;
-  font-size: 22px;
+  font-size: 15px;
   height: 22px;
-  line-height: 25px;
+  line-height: 17px;
 }
