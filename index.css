@@ -6,7 +6,7 @@
 
 .page {
   margin: 0;
-  padding: 0;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,12 +22,11 @@
   flex-direction: column;
   align-items: center;
   flex: 1 1 auto;
-  padding: 10px;
 }
 
 .form__input {
   padding: 10px;
-  width: 90%;
+  width: 100%;
   min-height: 100%;
   border: 2px solid #000;
   border-radius: 5px;
@@ -36,42 +35,29 @@
 }
 
 .buttons {
-  padding: 10px 10px 10px 0;
+  padding: 10px;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 20px;
   align-items: center;
-  height: 15%;
+  height: 10%;
 }
 
 .button {
-  border: none;
+  border: 2px solid #000;
+  border-radius: 10px;
   margin: 0;
-  padding: 0;
-  width: 60px;
-  height: 60px;
+  padding: 5px;
+  width: 40%;
   background-color: #fff;
-  background-repeat: no-repeat;
-  background-size: 48px 48px;
-  background-position: center;
-}
-
-.button_type_run {
-  background-image: url(./images/pause.png);
-}
-
-.button_type_pause {
-  background-image: url(./images/play.png);
-}
-
-.button_type_clear {
-  background-image: url(./images/reload.png);
+  height: 100%;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 .titles {
   display: flex;
-  justify-content: center;
-  gap: 40px;
+  justify-content: space-around;
   height: 5%;
 }
 

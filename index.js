@@ -1,31 +1,34 @@
 const textArea = document.querySelector('.form__input');
 const startButton = document.getElementById('startButton');
-const resetButton = document.querySelector('.button_type_clear');
+const resetButton = document.getElementById('resetButton');
 const overallTitle = document.querySelector('.titles__span_type_overall');
 const counterTitle = document.querySelector('.titles__span_type_counter');
 
 let start = 0;
 let end = 0;
-let timerId = null;
+let timerId = 0;
+let pause = 0;
+let pauseStart = 0;
+let pauseEnd = 0;
 
-function handleTypeStop () {
+function handleTypeStop (pauseTime) {
     end = Date.now();
-    const wastedTime = (end - start) / 1000 / 60;
+    const wastedTime = (end - start - pauseTime) / 1000 / 60;
     counterTitle.textContent = Math.floor(textArea.value.length / wastedTime);
-    startButton.classList.add('button_type_run');
-    startButton.classList.remove('button_type_pause');
     textArea.value = '';
 }
 
-function tsCounter() {
-  if(startButton.classList.contains('button_type_run')) {
-    end = Date.now();
-    const wastedTime = (end - start - 5000) / 1000 / 60;
-    counterTitle.textContent = Math.floor(textArea.value.length / wastedTime);
-    startButton.classList.toggle('button_type_pause');
-    textArea.value = '';
+function handlePause () {
+  if(!pauseStart) {
+    pauseStart = Date.now();
+    clearTimeout(timerId);
+    startButton.textContent = 'Возобновить';
   } else {
-    startButton.classList.remove('button_type_pause');
+    startButton.textContent = 'Пауза';
+    pauseEnd = Date.now();
+    pause = pause + (pauseEnd - pauseStart);
+    pauseStart = 0;
+    textArea.focus();
   }
 }
 
@@ -37,21 +40,21 @@ function handleResetAll() {
   end = 0;
 }
 
-function handleInput () {
+function handleInput (pauseTime) {
   if(!start) {
     start = Date.now();
   }
   overallTitle.textContent = textArea.value.length;
   now = Date.now();
-  const wastedTime = (now - start) / 1000 / 60;
+  const wastedTime = (now - start - pauseTime) / 1000 / 60;
   counterTitle.textContent = Math.floor(textArea.value.length / wastedTime);
   if (timerId) {
     clearTimeout(timerId);
   }
-  timerId = setTimeout(handleTypeStop, 5000);
+  timerId = setTimeout(() => handleTypeStop(pause), 5000);
 }
 
 
-textArea.addEventListener('input', handleInput);
-startButton.addEventListener('click', tsCounter);
+textArea.addEventListener('input', () => handleInput(pause));
+startButton.addEventListener('click', handlePause);
 resetButton.addEventListener('click', handleResetAll);
