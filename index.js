@@ -13,9 +13,11 @@ let pauseEnd = 0;
 
 function handleTypeStop (pauseTime) {
     end = Date.now();
-    const wastedTime = (end - start - pauseTime) / 1000 / 60;
+    const wastedTime = (end - start - pauseTime - 5000) / 1000 / 60;
     counterTitle.textContent = Math.floor(textArea.value.length / wastedTime);
     textArea.value = '';
+    pause = 0;
+    pauseStart = 0;
 }
 
 function handlePause () {
@@ -38,6 +40,8 @@ function handleResetAll() {
   overallTitle.textContent = 0;
   start = 0;
   end = 0;
+  pause = 0;
+  pauseStart = 0;
 }
 
 function handleInput (pauseTime) {
@@ -50,6 +54,7 @@ function handleInput (pauseTime) {
   counterTitle.textContent = Math.floor(textArea.value.length / wastedTime);
   if (timerId) {
     clearTimeout(timerId);
+    timerId = 0;
   }
   timerId = setTimeout(() => handleTypeStop(pause), 5000);
 }
