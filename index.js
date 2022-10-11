@@ -11,13 +11,19 @@ let pause = 0;
 let pauseStart = 0;
 let pauseEnd = 0;
 
+function clearParameters () {
+    pause = 0;
+    pauseStart = 0;
+    start = 0;
+    end = 0;
+}
+
 function handleTypeStop (pauseTime) {
     end = Date.now();
     const wastedTime = (end - start - pauseTime - 5000) / 1000 / 60;
     counterTitle.textContent = Math.floor(textArea.value.length / wastedTime);
     textArea.value = '';
-    pause = 0;
-    pauseStart = 0;
+    clearParameters();
 }
 
 function handlePause () {
@@ -38,10 +44,7 @@ function handleResetAll() {
   textArea.value = '';
   counterTitle.textContent = 0;
   overallTitle.textContent = 0;
-  start = 0;
-  end = 0;
-  pause = 0;
-  pauseStart = 0;
+  clearParameters();
 }
 
 function handleInput (pauseTime) {
